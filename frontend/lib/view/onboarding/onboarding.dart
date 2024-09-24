@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/core/config/app_config.dart';
 import 'package:frontend/core/style/typography.dart';
+import 'package:frontend/view/login/create_account.dart';
 import 'package:frontend/view/widget/primary_button.dart';
+import 'package:get/get.dart';
 
 class OnboardingPage extends StatefulWidget {
   const OnboardingPage({super.key});
@@ -87,7 +89,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
                       Expanded(
                         child: Image.asset(
                           "assets/images/${data[index][0]}",
-                          height: 350,
+                          height: 300,
                           width: 350,
                           fit: BoxFit.cover,
                         ),
@@ -120,14 +122,18 @@ class _OnboardingPageState extends State<OnboardingPage> {
             renderPageTags(),
             const SizedBox(height: 42),
             PrimaryButton(
-              onPressed: () => setState(
-                () {
-                  _pageController.nextPage(
-                    duration: const Duration(milliseconds: 150),
-                    curve: Curves.bounceIn,
-                  );
-                },
-              ),
+              onPressed: () {
+                if (_currentIndex != 2) {
+                  setState(() {
+                    _pageController.nextPage(
+                      duration: const Duration(milliseconds: 150),
+                      curve: Curves.bounceIn,
+                    );
+                  });
+                } else {
+                  Get.off(() => const CreateAccount());
+                }
+              },
               text: _currentIndex != 2
                   ? "Continue"
                   : "Start tracking your money!",
