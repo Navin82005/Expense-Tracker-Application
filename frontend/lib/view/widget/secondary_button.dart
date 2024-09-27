@@ -3,13 +3,22 @@ import 'package:frontend/core/style/color.dart';
 
 class SecondaryIconButton extends StatelessWidget {
   final Widget icon;
-  const SecondaryIconButton({super.key, required this.icon});
+  final VoidCallback? onTap;
+  final double? height;
+  final double? width;
+  const SecondaryIconButton({
+    super.key,
+    required this.icon,
+    this.onTap,
+    this.height = 44,
+    this.width = 44,
+  });
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 44,
-      width: 44,
+      height: height,
+      width: width,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(8),
         border: Border.all(width: 1, color: GrayscaleWhiteColors.darkWhite),
@@ -20,7 +29,7 @@ class SecondaryIconButton extends StatelessWidget {
             EdgeInsets.all(0),
           ),
         ),
-        onPressed: () {},
+        onPressed: onTap,
         child: icon,
       ),
     );

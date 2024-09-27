@@ -1,15 +1,28 @@
 import 'package:flutter/material.dart';
-import 'package:frontend/view/home/home.dart';
-import 'package:frontend/view/login/create_account.dart';
-import 'package:frontend/view/onboarding/onboarding.dart';
+import 'package:frontend/controller/global_controller.dart';
+import 'package:frontend/controller/login_controller.dart';
+import 'package:frontend/controller/navigation_controller.dart';
+import 'package:frontend/layout.dart';
 import 'package:get/get.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 
-void main() {
-  runApp(const MyApp());
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Hive.initFlutter();
+  await Hive.openBox("userData");
+  await Hive.openBox("wallet");
+  // final dir = await getApplicationDocumentsDirectory();
+
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  MyApp({super.key});
+  final globalController = Get.put(GlobalController());
+
+  final NavigationController navigationController =
+      Get.put(NavigationController());
+  final LoginController loginController = Get.put(LoginController());
 
   @override
   Widget build(BuildContext context) {
@@ -19,10 +32,11 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: const Color(0xFF4BC355)),
         useMaterial3: true,
+      ).copyWith(
+        splashColor: Colors.transparent,
+        // highlightColor: Colors.transparent,
       ),
-      // home: const CreateAccount(),
-      // home: const OnboardingPage(),
-      home: const Home(),
+      home: const Layout(),
     );
   }
 }

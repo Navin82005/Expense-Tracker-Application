@@ -11,6 +11,7 @@ class TransactionModel {
   String uid;
   String name;
   String note;
+  int day;
 
   TransactionCategory category;
   TransactionType type;
@@ -27,7 +28,8 @@ class TransactionModel {
     required this.type,
     required this.dateTime,
     required this.note,
-  }) : uid = const Uuid().v4();
+  })  : uid = const Uuid().v4(),
+        day = dateTime.day;
 
   String returnDate() {
     return DateFormat('dd MMMM yyyy').format(dateTime);

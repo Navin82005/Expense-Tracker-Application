@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/controller/dashboard_controller.dart';
+import 'package:frontend/controller/global_controller.dart';
 import 'package:frontend/core/style/color.dart';
 import 'package:frontend/core/style/typography.dart';
-import 'package:frontend/view/home/widgets/secondary_container.dart';
+import 'package:frontend/view/widget/expense.dart';
+import 'package:frontend/view/widget/income.dart';
+import 'package:get/get.dart';
 
 class HeroSection extends StatelessWidget {
   final DashboardController dashboardController;
@@ -48,7 +51,7 @@ class HeroFirstChild extends StatelessWidget {
             ),
             const SizedBox(height: 8),
             Text(
-              "Rp ${dashboardController.returnRate()}",
+              "${Get.find<GlobalController>().currencySymbol} ${dashboardController.returnRate()}",
               style: CustomTypography.heading1.copyWith(
                 color: GrayscaleWhiteColors.white,
               ),
@@ -69,63 +72,9 @@ class HeroSecondChild extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        SecondaryContainer(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Text("Income", style: CustomTypography.body3),
-                const SizedBox(height: 8),
-                Row(
-                  children: [
-                    Icon(
-                      Icons.arrow_drop_up,
-                      color: PrimaryColor.shade600,
-                      size: CustomTypography.subHead1.fontSize! * 1.5,
-                    ),
-                    const SizedBox(width: 4),
-                    Text(
-                      dashboardController.formatRate(
-                        dashboardController.income,
-                      ),
-                      style: CustomTypography.subHead1,
-                    ),
-                  ],
-                ),
-              ],
-            ),
-          ),
-        ),
+        Income(amount: dashboardController.income),
         const SizedBox(width: 12),
-        SecondaryContainer(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Text("Expenses", style: CustomTypography.body3),
-                const SizedBox(height: 8),
-                Row(
-                  children: [
-                    Icon(
-                      Icons.arrow_drop_down_circle,
-                      color: DangerColors.shade600,
-                      size: CustomTypography.subHead1.fontSize,
-                    ),
-                    const SizedBox(width: 4),
-                    Text(
-                      dashboardController.formatRate(
-                        dashboardController.expenses,
-                      ),
-                      style: CustomTypography.subHead1,
-                    ),
-                  ],
-                ),
-              ],
-            ),
-          ),
-        ),
+        Expense(amount: dashboardController.expenses)
       ],
     );
   }

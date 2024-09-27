@@ -25,6 +25,7 @@ class _CreateAccountState extends State<CreateAccount> {
 
   @override
   void dispose() {
+    super.dispose();
     nameFocus.dispose();
     currencyFocus.dispose();
     balanceFocus.dispose();
@@ -110,7 +111,6 @@ class _CreateAccountState extends State<CreateAccount> {
                     top: 0,
                     child: Container(
                       width: double.infinity,
-                      color: GrayscaleGrayColors.paleGray,
                       child: const Center(
                         child: CircularProgressIndicator(),
                       ),

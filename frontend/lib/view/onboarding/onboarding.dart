@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:frontend/controller/login_controller.dart';
 import 'package:frontend/core/config/app_config.dart';
 import 'package:frontend/core/style/typography.dart';
 import 'package:frontend/view/login/create_account.dart';
@@ -56,7 +57,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
       appBar: AppBar(
         actions: [
           TextButton(
-            onPressed: () => print("skipping..."),
+            onPressed: () => Get.off(const CreateAccount()),
             child: Text(
               _currentIndex != 2 ? "Skip" : "Done",
               style: CustomTypography.subHead1.copyWith(

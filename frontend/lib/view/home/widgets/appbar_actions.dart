@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/core/config/app_config.dart';
+import 'package:frontend/core/style/color.dart';
 import 'package:frontend/core/style/typography.dart';
 import 'package:frontend/view/widget/secondary_button.dart';
 
@@ -8,16 +9,18 @@ class AppBarActions extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Row(
+    return Row(
       children: [
         SecondaryIconButton(
-          icon: Icon(Icons.search, size: 20),
+          icon: Icon(Icons.search,
+              size: 20, color: GrayscaleGrayColors.shadedGray),
         ),
-        SizedBox(width: 8),
+        const SizedBox(width: 8),
         SecondaryIconButton(
-          icon: Icon(Icons.notifications, size: 20),
+          icon: Icon(Icons.notifications,
+              size: 20, color: GrayscaleGrayColors.shadedGray),
         ),
-        SizedBox(width: 16),
+        const SizedBox(width: 16),
       ],
     );
   }

@@ -8,7 +8,7 @@ class TransactionController extends GetxController {
 
   fetchTransactions() async {
     isLoading.value = true;
-    await Future.delayed(const Duration(seconds: 5));
+    await Future.delayed(const Duration(seconds: 3));
     transactions.value = [
       TransactionModel(
         name: "Stock Divided",
@@ -41,7 +41,7 @@ class TransactionController extends GetxController {
     isLoading.value = false;
   }
 
-  String formatRate(double rate) {
+  static String formatRate(double rate) {
     final formattedRate = NumberFormat("###,###,###").format(rate);
     return formattedRate;
   }

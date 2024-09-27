@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/controller/wallet_creation_controller.dart';
+import 'package:frontend/layout.dart';
 import 'package:get/get.dart';
 
 import 'package:frontend/core/style/typography.dart';
@@ -35,10 +36,12 @@ class CustomLoginFooter extends StatelessWidget {
         ),
         const SizedBox(height: 25),
         PrimaryButton(
-          onPressed: () {
+          onPressed: () async {
             var controller = Get.find<WalletCreationController>();
             print(controller.data());
-            print(controller.createWallet());
+            if (await controller.createWallet()) {
+              Get.off(() => const Layout());
+            }
           },
           text: "Create new wallet",
         ),
